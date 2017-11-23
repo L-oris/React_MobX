@@ -9,8 +9,8 @@ import {observer} from 'mobx-react'
   }
 
   render(){
-    const {todos, filter} = this.props.store
-    const todoLis = todos.map(todo => (
+    const {filteredTodos, filter} = this.props.store
+    const todoLis = filteredTodos.map(todo => (
       <li key={todo}>{todo}</li>
     ))
 
