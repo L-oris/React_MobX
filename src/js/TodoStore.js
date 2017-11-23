@@ -9,6 +9,12 @@ class TodoStore {
     const regexFilter = new RegExp(this.filter,'i')
     return this.todos.filter(todo => regexFilter.test(todo))
   }
+
+  createTodo(newTodo){
+    if(newTodo){
+      this.todos.push(newTodo)
+    }
+  }
 }
 
 //attach the store to 'window' for debugging

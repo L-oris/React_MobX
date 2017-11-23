@@ -8,6 +8,15 @@ import {observer} from 'mobx-react'
     this.props.store.filter = e.target.value
   }
 
+  createNew(e){
+    //create new todo only if 'Enter' is pressed (keyCode 13)
+    if(e.which === 13){
+      this.props.store.createTodo(e.target.value)
+      //clear input
+      e.target.value = ''
+    }
+  }
+
   render(){
     const {filteredTodos, filter} = this.props.store
     const todoLis = filteredTodos.map(todo => (
@@ -18,7 +27,10 @@ import {observer} from 'mobx-react'
       <div>
         <h1>Todos:</h1>
 
-        <div>{filter}</div>
+        <h3>Create</h3>
+        <input className="create" onKeyPress={this.createNew.bind(this)}/>
+
+        <h3>Filter</h3>
         <input className="filter" value={filter} onChange={this.filter.bind(this)}/>
 
         <ul>{todoLis}</ul>
