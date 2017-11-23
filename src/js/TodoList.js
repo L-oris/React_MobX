@@ -20,7 +20,7 @@ import {observer} from 'mobx-react'
   render(){
     const {filteredTodos, filter} = this.props.store
     const todoLis = filteredTodos.map(todo => (
-      <li key={todo}>{todo}</li>
+      <li key={todo.id}>{todo.value}</li>
     ))
 
     return (

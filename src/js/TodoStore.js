@@ -1,7 +1,19 @@
 import {observable, computed} from 'mobx'
 
+class Todo {
+  @observable value
+  @observable id
+  @observable complete
+
+  constructor(value){
+    this.value = value
+    this.id = Date.now()
+    this.complete = false
+  }
+}
+
 class TodoStore {
-  @observable todos = ["buy milk", "buy eggs"]
+  @observable todos = []
   @observable filter = ""
 
   @computed get filteredTodos(){
@@ -10,9 +22,9 @@ class TodoStore {
     return this.todos.filter(todo => regexFilter.test(todo))
   }
 
-  createTodo(newTodo){
-    if(newTodo){
-      this.todos.push(newTodo)
+  createTodo(value){
+    if(value){
+      this.todos.push(new Todo(value))
     }
   }
 }
