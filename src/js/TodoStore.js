@@ -19,13 +19,20 @@ class TodoStore {
   @computed get filteredTodos(){
     //case insensitive regex
     const regexFilter = new RegExp(this.filter,'i')
-    return this.todos.filter(todo => regexFilter.test(todo))
+    return this.todos.filter(todo => regexFilter.test(todo.value))
   }
 
   createTodo(value){
     if(value){
       this.todos.push(new Todo(value))
     }
+  }
+
+  //automatically binded to correct 'this', since it's arrow function
+  clearComplete = () => {
+    //in mobx we cannot directly remove a key-value pair
+    const incompleteTodos = this.todos.filter(todo => !todo.complete)
+    this.todos.replace(incompleteTodos)
   }
 }
 
